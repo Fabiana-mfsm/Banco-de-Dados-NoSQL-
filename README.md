@@ -97,9 +97,9 @@ db.<collection_name>.find()
 
 
 
-# - Introdução - CRUD
+## - Introdução - CRUD
 
-## JSON
+### JSON
 
 * `"name": "jefté"` é chamado de campo (field) ou propriedade (property) do documento JSON.
 * Múltiplos campos são separados por vírgulas.
@@ -113,20 +113,103 @@ db.<collection_name>.find()
   * arrays (`[...]`)
   * outros documentos, também chamados de objetos (`{...}`)
 
-## CRUD
-### Create
+### CRUD
+#### Create
 - `insertOne(data, options)`
 - `insertMany(data, options)`
 
-### Update
+#### Update
 - `updateOne(filter, data, options)`
 - `updateMany(filter, data, options)`
 - `replaceOne(filter, data, options)`
 
-### Read
+#### Read
 - `find(filter, options)`
 - `findOne(filter, options)`
 
-### Delete
+#### Delete
 - `deleteOne(filter, options)`
 - `deleteMany(filter, options)`
+
+***
+***
+## Comandos e Operações do MongoDB
+### Exibir os bancos de dados
+
+```javascript
+show databases
+```
+Esse comando exibe todos os bancos de dados existentes no MongoDB.
+
+### Selecionar um banco de dados
+
+```javascript
+use loja_informatica
+```
+Esse comando seleciona o banco de dados `loja_informatica` para que as próximas operações sejam realizadas nele.
+
+### Criar uma collection
+
+```javascript
+db.createCollection("cliente")
+```
+Cria uma nova collection chamada `cliente`.
+
+As collections são utilizadas para armazenar documentos no MongoDB, funcionando de forma semelhante às tabelas dos bancos de dados relacionais.
+
+### Exibir todas as collections
+
+```javascript
+show collections
+```
+Exibe todas as collections existentes no banco de dados selecionado.
+
+### Exibir todos os documentos
+```javascript
+db.cliente.find()
+```
+Retorna todos os documentos armazenados na collection `cliente`.
+
+### Inserir um documento
+
+```javascript
+db.cliente.insertOne({
+    "nome": "Jefté",
+    "idade": 35,
+    "pets": ["Dora", "Sabrina"],
+    "endereco": {
+        "logradouro": "Sossego"
+    }
+})
+```
+O comando `insertOne()` é utilizado para inserir apenas um documento na collection.
+
+### Inserir vários documentos
+
+```javascript
+db.cliente.insertMany([
+    { "nome": "Brenno" },
+    { "nome": "João" },
+    { "nome": "Maria" },
+    { "nome": "José" },
+    { "nome": "Noé" }
+])
+```
+O comando `insertMany()` permite inserir vários documentos de uma única vez.
+
+### Buscar documentos por um campo
+
+```javascript
+db.cliente.find({ "nome": "José" })
+```
+Esse comando realiza uma busca na collection `cliente`, retornando os documentos que possuem o campo `nome` com o valor `"José"`.
+
+### Buscar um documento pelo identificador
+
+```javascript
+db.cliente.find({
+    "_id": ObjectId("6a7bbab007ff2cf8649f68a9")
+})
+```
+O campo `_id` é utilizado pelo MongoDB como identificador único de cada documento. Esse comando permite localizar um documento específico através desse identificador.
+
